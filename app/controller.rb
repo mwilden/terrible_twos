@@ -1,4 +1,4 @@
-require_relative 'lib/terrible_twos'
+require_relative '../lib/terrible_twos'
 require_relative 'view'
 
 class Controller

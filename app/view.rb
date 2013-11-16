@@ -1,4 +1,4 @@
-require_relative 'lib/terrible_twos'
+require_relative '../lib/terrible_twos'
 
 class View
   def initialize drill

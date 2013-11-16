@@ -1,7 +1,7 @@
-require_relative 'controller'
-require_relative 'view'
+require_relative 'app/controller'
+require_relative 'app/view'
 
-class TestTwos
+class TerribleTwos
   def initialize
     @drill = Drill.new
     @view = View.new @drill
@@ -14,4 +14,4 @@ class TestTwos
 
 end
 
-TestTwos.new.run
+TerribleTwos.new.run
