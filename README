@@ -1,7 +1,0 @@
-hand_drill
-----------
-Mark Wilden, 2009
-
-hand_drill drills you on the play of the opening hand in Texas Hold'em.
-
-To run hand_drill, run 'ruby hand_drill.rb' from the hand_drill directory.
