@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative 'app/controller'
 require_relative 'app/view'
 
