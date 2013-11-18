@@ -4,8 +4,8 @@ require_relative 'app/view'
 
 class TerribleTwos
   def initialize
-    @drill = Drill.new
-    @view = View.new @drill
+    @drill      = Drill.new
+    @view       = View.new @drill
     @controller = Controller.new @drill, @view
   end
 
