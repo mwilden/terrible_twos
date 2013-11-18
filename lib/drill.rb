@@ -2,19 +2,23 @@ class Drill
   include Enumerable
   extend Forwardable
   def_delegator :@questions, :each
-  attr_reader :correct_answers, :wrong_answers
+  attr_reader :correct_answers, :incorrect_answers
 
   def initialize
     @questions = create_questions
-    @correct_answers = @wrong_answers = 0
+    @correct_answers = @incorrect_answers = 0
+  end
+
+  def valid? answer
+    true
   end
 
   def record is_correct
-    is_correct ? @correct_answers += 1 : @wrong_answers += 1
+    is_correct ? @correct_answers += 1 : @incorrect_answers += 1
   end
 
   def total_answers
-    @correct_answers + @wrong_answers
+    @correct_answers + @incorrect_answers
   end
 
   def correct_percent
@@ -22,20 +26,17 @@ class Drill
     (@correct_answers.to_f / total_answers * 100).round
   end
 
-  def ask_twice_again_later question
-    insert_after = @questions.index(question)
-    2.times do
-      insert_before = entries.size
-      insert_at = rand(insert_before - insert_after) + insert_after + 1
-      @questions.insert(insert_at, question)
-    end
+  def record_correct_answer
+  end
+
+  def record_incorrect_answer
   end
 
   private
   def create_questions
     @questions = []
     @questions << Question.new('AA', 'lava')
-    @questions
+    @questions << Question.new('AB', 'muscle')
   end
 
 end

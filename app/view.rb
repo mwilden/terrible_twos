@@ -9,34 +9,28 @@ class View
     puts 'Terrible Twos 0.1 (18 Nov 2013] by Mark Wilden'
   end
 
-  def show_results
-    puts "Final results: #{@drill.correct_percent}% #{@drill.correct_answers}/#{@drill.total_answers}"
-  end
-
   def ask question
     print "#{question.number} #{question} "
   end
 
   def get_answer
-    loop do
-      case gets.chomp
-      when 'q' then return :quit
-      when 'r' then return :raise
-      when 'c' then return :call
-      when '?' then return :help
-      when ''  then return :fold
-      else print '? '
-      end
-    end
+    gets.chomp
   end
 
-  def show_help_for_incorrect_answer question
-    print "*** "
-    show_help(question)
+  def show_not_a_letter_message answer
+    puts 'not a letter'
   end
 
-  def show_help question
-    puts question.help
+  def show_correct_answer question
+    puts "correct answer here"
+  end
+
+  def show_definition question
+    puts "definition"
+  end
+
+  def show_statistics
+    puts "Final results: #{@drill.correct_percent}% #{@drill.correct_answers}/#{@drill.total_answers}"
   end
 
 end
