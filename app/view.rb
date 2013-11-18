@@ -10,7 +10,7 @@ class View
   end
 
   def ask question
-    print "#{question.number} #{question} "
+    print question.two_letter_word + ' '
   end
 
   def get_answer
@@ -22,15 +22,15 @@ class View
   end
 
   def show_correct_answer question
-    puts "correct answer here"
+    puts question.two_letter_word
   end
 
   def show_definition question
-    puts "definition"
+    puts question.definition
   end
 
   def show_statistics
-    puts "Final results: #{@drill.correct_percent}% #{@drill.correct_answers}/#{@drill.total_answers}"
+    puts "#{@drill.correct_percent}% #{@drill.correct_answer_count}/#{@drill.total_answer_count}"
   end
 
 end
