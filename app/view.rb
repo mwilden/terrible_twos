@@ -5,13 +5,15 @@ class View
     @drill = drill
   end
 
-  def show_initial
-    puts "#{@drill.entries.size} hands"
-    puts "c)all r)aise [check/fold]"
+  def show_banner
+    puts 'Terrible Twos 0.1 (18 Nov 2013] by Mark Wilden'
+  end
+
+  def show_results
+    puts "Final results: #{@drill.correct_percent}% #{@drill.correct_answers}/#{@drill.total_answers}"
   end
 
   def ask question
-    show_table question.position
     print "#{question.number} #{question} "
   end
 
@@ -37,20 +39,5 @@ class View
     puts question.help
   end
 
-  def show_report
-    puts "#{@drill.correct_percent}% #{@drill.correct_answers}/#{@drill.total_answers}"
-  end
-
-  private
-  def show_table position
-    '1234567DSB'.each_byte do |char|
-      print char.chr + ' '
-    end
-    puts
-    (position - 1).times do
-      print '- '
-    end
-    puts '^'
-  end
 end
 
