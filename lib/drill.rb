@@ -2,34 +2,32 @@ class Drill
   include Enumerable
   extend Forwardable
   def_delegator :@questions, :each
-  attr_reader :correct_answers, :incorrect_answers
+  attr_reader :correct_answer_count, :incorrect_answer_count
 
   def initialize
     @questions = create_questions
-    @correct_answers = @incorrect_answers = 0
+    @correct_answer_count = @incorrect_answer_count = 0
   end
 
   def valid? answer
     true
   end
 
-  def record is_correct
-    is_correct ? @correct_answers += 1 : @incorrect_answers += 1
-  end
-
-  def total_answers
-    @correct_answers + @incorrect_answers
-  end
-
-  def correct_percent
-    return 0 if total_answers.zero?
-    (@correct_answers.to_f / total_answers * 100).round
-  end
-
   def record_correct_answer
+    @correct_answer_count += 1
   end
 
   def record_incorrect_answer
+    @incorrect_answer_count += 1
+  end
+
+  def total_answer_count
+    @correct_answer_count + @incorrect_answer_count
+  end
+
+  def correct_percent
+    return 0 if total_answer_count.zero?
+    (@correct_answer_count.to_f / total_answer_count * 100).round
   end
 
   private
