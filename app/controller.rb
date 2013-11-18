@@ -3,16 +3,19 @@ require_relative 'view'
 
 class Controller
   def initialize drill, view
-    puts $:
     @drill, @view = drill, view
   end
 
   def run
-    @view.show_initial
+    @view.show_banner
+    run_drill
+    @view.show_results
+  end
+
+  def run_drill
     @drill.each do |question|
       break unless answer question
     end
-    @view.show_report
   end
 
   def answer question
