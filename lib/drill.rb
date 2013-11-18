@@ -33,7 +33,9 @@ class Drill
 
   private
   def create_questions
-    []
+    @questions = []
+    @questions << Question.new('AA', 'lava')
+    @questions
   end
 
 end
