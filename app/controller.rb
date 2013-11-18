@@ -22,7 +22,7 @@ class Controller
     @view.ask question
     loop do
       answer = @view.get_answer
-      if !valid? answer
+      unless valid? answer
         handle_invalid_answer answer
       else
         if question.correct? answer
