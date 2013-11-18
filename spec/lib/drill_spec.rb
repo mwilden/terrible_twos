@@ -14,20 +14,4 @@ describe Drill do
     end
   end
 
-  describe 'question number'
-    it 'each question should have a sequential question number'
-      #drill = Drill.new
-      #drill.entries[0].number.should == 1
-      #drill.entries[1].number.should == 2
-    #end
-  #end
-
-  describe 're-asking missed questions'
-    it 'should ask a missed question twice again'
-      #drill = Drill.new
-      #question = drill.entries.first
-      #drill.entries.select {|entry| entry.to_s == question.to_s}.size.should == 1
-      #drill.ask_twice_again_later(question)
-      #drill.entries.select {|entry| entry.to_s == question.to_s}.size.should == 3
-
 end
