@@ -1,7 +1,16 @@
 GEM
+  remote: http://rubygems.org/
   specs:
     diff-lcs (1.2.4)
+    gem-man (0.3.0)
+    hpricot (0.8.6)
+    mustache (0.99.5)
     rake (10.1.0)
+    rdiscount (2.1.7)
+    ronn (0.7.3)
+      hpricot (>= 0.8.2)
+      mustache (>= 0.7.0)
+      rdiscount (>= 1.5.8)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -15,5 +24,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  gem-man
   rake
+  ronn
   rspec
