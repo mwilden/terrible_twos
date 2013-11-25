@@ -5,7 +5,8 @@ class Drill
   attr_reader :correct_answer_count, :incorrect_answer_count
 
   def initialize
-    @questions = create_questions
+    @two_letter_words = create_two_letter_words
+    @questions = create_questions @two_letter_words
     @correct_answer_count = @incorrect_answer_count = 0
   end
 
@@ -31,10 +32,19 @@ class Drill
   end
 
   private
-  def create_questions
+  def create_two_letter_words
+    two_letter_words = []
+    two_letter_words << TwoLetterWord.new('AA', 'lava')
+    two_letter_words << TwoLetterWord.new('AB', 'muscle')
+    two_letter_words
+  end
+
+  def create_questions two_letter_words
     @questions = []
-    @questions << Question.new('AA', 'lava')
-    @questions << Question.new('AB', 'muscle')
+    for word in two_letter_words
+      @questions << Question.create_questions, word
+    end
+    @questions
   end
 
 end
