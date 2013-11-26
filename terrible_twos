@@ -1,12 +1,10 @@
 #!/usr/bin/env ruby
 require_relative 'app/controller'
-require_relative 'app/view'
 
 class TerribleTwos
   def initialize
-    @drill      = Drill.new
-    @view       = View.new @drill
-    @controller = Controller.new @drill, @view
+    @drill = Drill.new
+    @controller = Controller.new @drill
   end
 
   def run

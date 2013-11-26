@@ -3,8 +3,8 @@ require_relative '../lib/terrible_twos'
 require_relative 'view'
 
 class Controller
-  def initialize drill, view
-    @drill, @view = drill, view
+  def initialize drill
+    @drill, @view = drill, View.new
   end
 
   def run
