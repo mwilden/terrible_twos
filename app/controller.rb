@@ -18,25 +18,6 @@ class Controller
     end
   end
 
-  def answer question
-    @view.ask question
-    loop do
-      answer = @view.get_answer
-      unless valid? answer
-        handle_invalid_answer answer
-      else
-        if question.correct? answer
-          handle_correct_answer
-        else
-          @drill.record_incorrect_answer
-          @view.show_correct_answer question
-        end
-        handle_after_answer question
-        break
-      end
-    end
-  end
-
   def valid? answer
     @drill.valid? answer
   end
