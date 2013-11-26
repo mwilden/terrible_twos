@@ -1,6 +1,13 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    columnize (0.3.6)
+    debugger (1.6.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     gem-man (0.3.0)
     hpricot (0.8.6)
@@ -25,6 +32,7 @@ PLATFORMS
 
 DEPENDENCIES
   gem-man
+  debugger
   rake
   ronn
   rspec
