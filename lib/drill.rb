@@ -1,13 +1,16 @@
 # coding: UTF-8
+require 'forwardable'
+require_relative 'terrible_twos'
+require_relative 'board'
+
 class Drill
   include Enumerable
   extend Forwardable
-  def_delegator :@questions, :each
+  def_delegator :@boards, :each
   attr_reader :correct_answer_count, :incorrect_answer_count
 
   def initialize
-    @two_letter_words = create_two_letter_words
-    @questions = create_questions @two_letter_words
+    @boards = create_boards
     @correct_answer_count = @incorrect_answer_count = 0
   end
 
@@ -33,19 +36,19 @@ class Drill
   end
 
   private
-  def create_two_letter_words
-    two_letter_words = []
-    two_letter_words << TwoLetterWord.new('AA', 'lava')
-    two_letter_words << TwoLetterWord.new('AB', 'muscle')
-    two_letter_words
+  def create_boards
+    @boards = []
+    for letter in 'A'..'B'
+      create_board "#{letter}_"
+      create_board "_#{letter}"
+    end
+    @boards
   end
 
-  def create_questions two_letter_words
-    @questions = []
-    for word in two_letter_words
-      @questions << Question.create_questions, word
-    end
-    @questions
+  def create_board board_string
+    board = Board.new board_string
+    return unless board.has_moves?
+    @boards << board
   end
 
 end
