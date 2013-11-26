@@ -7,10 +7,10 @@ class Drill
   include Enumerable
   extend Forwardable
   def_delegator :@boards, :each
-  attr_reader :correct_answer_count, :incorrect_answer_count
+  attr_reader :correct_answer_count, :incorrect_answer_count, :boards
 
-  def initialize
-    @boards = create_boards
+  def initialize starting_letter = 'A', ending_letter = 'Z'
+    @boards = create_boards starting_letter, ending_letter
     @correct_answer_count = @incorrect_answer_count = 0
   end
 
@@ -35,10 +35,10 @@ class Drill
     (@correct_answer_count.to_f / total_answer_count * 100).round
   end
 
-  private
-  def create_boards
-    @boards = []
-    for letter in 'A'..'B'
+  ######
+  def create_boards starting_letter, ending_letter
+    clear_boards
+    for letter in starting_letter..ending_letter
       create_board "#{letter}_"
       create_board "_#{letter}"
     end
@@ -49,6 +49,11 @@ class Drill
     board = Board.new board_string
     return unless board.has_moves?
     @boards << board
+    board
+  end
+
+  def clear_boards
+    @boards = []
   end
 
 end
