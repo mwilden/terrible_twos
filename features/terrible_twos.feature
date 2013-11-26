@@ -1,3 +1,4 @@
+# coding: UTF-8
 Feature: Terrible Twos
   Starting up the program
 

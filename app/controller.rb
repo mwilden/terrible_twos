@@ -1,3 +1,4 @@
+# coding: UTF-8
 require_relative '../lib/terrible_twos'
 require_relative 'view'
 
