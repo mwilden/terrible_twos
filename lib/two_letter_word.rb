@@ -1,3 +1,5 @@
+require_relative 'terrible_twos'
+
 class TwoLetterWord
   attr_reader :word, :definition
 
