@@ -22,11 +22,11 @@ describe Board do
   describe "Being empty" do
     it "should consider an empty board to be one with no moves" do
       board = Board.new 'ZZ', 'A', 'B'
-      board.should_not have_moves
+      board.should_not have_any_moves
     end
     it "should consider an nonempty board to be one with moves" do
       board = Board.new 'A_', 'A', 'B'
-      board.should have_moves
+      board.should have_any_moves
     end
   end
 

@@ -5,32 +5,27 @@ require_relative 'scrabble'
 class Board
   attr_reader :moves
 
-  def initialize string, first_letter = 'A', last_letter = 'Z'
+  def initialize string, first_letter = 'A', last_letter = 'B'
     @string = string
-    @moves = []
-    make_moves first_letter, last_letter
+    @moves = create_moves first_letter, last_letter
   end
 
-  def make_moves first_letter, last_letter
+  def create_moves first_letter, last_letter
+    moves = []
     for letter in first_letter..last_letter
       two_letter_word_string = @string.gsub /_/, letter
       two_letter_word = Scrabble.find_two_letter_word two_letter_word_string
-      @moves << two_letter_word if two_letter_word
+      moves << two_letter_word if two_letter_word
     end
-    @moves.uniq!
+    moves
   end
 
-  def has_moves?
-    !@moves.empty?
+  def has_any_moves?
+    !@moves.nil? && !@moves.empty?
   end
 
-  def inspect
-    string = super
-    for move in @moves
-      string << move.inspect
-    end
-    string
+  def has_move? two_letter_word
+    @moves.find two_letter_word
   end
 
 end
-
