@@ -27,8 +27,8 @@ class View
     puts question.definition
   end
 
-  def show_statistics drill
-    puts "#{drill.correct_percent}% #{drill.correct_answer_count}/#{drill.total_answer_count}"
+  def show_board board
+    puts board.inspect
   end
 
 end
