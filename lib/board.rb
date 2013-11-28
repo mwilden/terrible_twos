@@ -3,9 +3,9 @@ require_relative 'terrible_twos'
 require_relative 'scrabble'
 
 class Board
-  attr_reader :moves
+  attr_reader :moves, :string
 
-  def initialize string, first_letter = 'A', last_letter = 'B'
+  def initialize string, first_letter = 'A', last_letter = 'Z'
     @string = string
     @moves = create_moves first_letter, last_letter
   end
@@ -26,6 +26,17 @@ class Board
 
   def has_move? two_letter_word
     @moves.find two_letter_word
+  end
+
+  def find letter
+    string = @string.gsub /_/, letter
+    @moves.find do |move|
+      move.word == string
+    end
+  end
+
+  def move_count
+    @moves.count
   end
 
 end

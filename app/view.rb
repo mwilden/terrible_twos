@@ -28,7 +28,8 @@ class View
   end
 
   def show_board board
-    puts board.inspect
+    print board.string
+    print ' '
   end
 
 end
