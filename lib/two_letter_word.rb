@@ -8,4 +8,3 @@ class TwoLetterWord
   end
 
 end
-
