@@ -60,7 +60,7 @@ class Controller
     move_strings = []
     for move in board.moves
       unless @moves.include? move
-        move_strings << move.word
+        move_strings << "#{move.word} (#{move.definition})"
       end
     end
     string += move_strings.join(', ') + '.'
