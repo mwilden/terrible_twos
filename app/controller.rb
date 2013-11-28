@@ -14,48 +14,87 @@ class Controller
 
   def run_drill
     for board in @drill.boards
-      show_board board
+      puts
       @moves = []
+      @incorrect_move_count = 0
+      @duplicate_move_count = 0
+      show_board board
       while true
         response = gets.chomp.upcase
-        break if handle_response board, response
+        response_response = handle_response board, response
+        break if [NoMoreMoves, GiveUp].include? response_response
       end
     end
   end
 
   def handle_response board, response
+    if response == '?'
+      return handle_give_up board
+    end
+
     move = board.find response
     if move
-      handle_correct_response board, move
+      if @moves.include? move
+        handle_duplicate_move board
+      else
+        handle_correct_move board, move
+      end
     else
-      handle_incorrect_response board
+      handle_incorrect_move board
     end
-    move
   end
 
   NoMoreMoves = 1
   Incorrect = 2
   Correct = 3
+  Duplicate = 4
+  GiveUp = 5
 
-  def handle_correct_response board, move
-    puts "Correct. #{move.word}: #{move.definition}"
+  def handle_give_up board
+    string = "Answered #{@moves.count} out of #{board.moves.count}. "
+    string << "The rest of the moves were: "
+    move_strings = []
+    for move in board.moves
+      unless @moves.include? move
+        move_strings << move.word
+      end
+    end
+    string += move_strings.join(', ') + '.'
+    puts string
+    GiveUp
+  end
+
+  def handle_correct_move board, move
+    string = "Correct. #{move.word}: #{move.definition}."
     @moves << move
     if @moves.size == board.move_count
       return handle_no_more_moves board
+    else
+      moves_left_count = board.moves.count - @moves.count
+      string << " #{moves_left_count} #{pluralize 'move', moves_left_count} left."
+      puts string
+      show_board board
     end
     Correct
   end
 
   def handle_no_more_moves board
-    puts "All moves were found"
     show_board_statistics board
     NoMoreMoves
   end
 
-  def handle_incorrect_response board
-    puts "Incorrect"
+  def handle_incorrect_move board
+    puts "Incorrect."
+    @incorrect_move_count += 1
     show_board board
     Incorrect
+  end
+
+  def handle_duplicate_move board
+    puts "Already played."
+    @duplicate_move_count += 1
+    show_board board
+    Duplicate
   end
 
   def show_board board
@@ -63,6 +102,14 @@ class Controller
   end
 
   def show_board_statistics board
+    string = "#{board.moves.size} possible moves. #{@incorrect_move_count} incorrect moves."
+    string << " #{@duplicate_move_count} duplicates." if @duplicate_move_count > 0
+    puts string
   end
 
+  def pluralize root, count
+    string = root
+    string << 's' if count != 1
+    string
+  end
 end
