@@ -32,6 +32,10 @@ class Controller
       return handle_give_up board
     end
 
+    if response == '~'
+      exit
+    end
+
     move = board.find response
     if move
       if @moves.include? move
