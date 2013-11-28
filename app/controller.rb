@@ -107,7 +107,7 @@ class Controller
 
   def show_board_statistics board
     string = "#{board.moves.size} possible moves. #{@incorrect_move_count} incorrect moves."
-    string << " #{@duplicate_move_count} duplicates." if @duplicate_move_count > 0
+    string << " #{@duplicate_move_count} #{pluralize('duplicate', duplicate_move_count)}." if @duplicate_move_count > 0
     puts string
   end
 
