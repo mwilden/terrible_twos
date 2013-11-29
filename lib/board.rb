@@ -35,7 +35,7 @@ class Board
   def create_moves first_letter, last_letter
     moves = []
     for letter in first_letter..last_letter
-      two_letter_word_string = @string.gsub /_/, letter
+      two_letter_word_string = @string.gsub ' ', letter
       two_letter_word = Scrabble.find_two_letter_word two_letter_word_string
       moves << two_letter_word if two_letter_word
     end
@@ -47,7 +47,7 @@ class Board
   end
 
   def find letter
-    string = @string.gsub /_/, letter
+    string = @string.gsub ' ', letter
     @correct_moves.find do |move|
       move.word == string
     end
