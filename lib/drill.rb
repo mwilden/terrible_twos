@@ -9,17 +9,21 @@ class Drill
   attr_reader :boards
   def_delegator :@boards, :each
 
-  def initialize starting_letter = 'A', ending_letter = 'Z'
-    create_boards starting_letter, ending_letter
+  def initialize starting_letter = 'A', ending_letter = 'Z', board = nil
+    @boards = []
+    if board.nil?
+      create_boards starting_letter, ending_letter
+    else
+      create_board board, starting_letter, ending_letter
+    end
+    @boards.shuffle!
   end
 
   def create_boards starting_letter, ending_letter
-    @boards = []
     for letter in starting_letter..ending_letter
       create_board "#{letter} ", starting_letter, ending_letter
       create_board " #{letter}", starting_letter, ending_letter
     end
-    @boards.shuffle!
   end
 
   def create_board board_string, starting_letter, ending_letter
