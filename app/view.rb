@@ -10,7 +10,7 @@ class View
   def show_board board
     print board.to_s
     print "\b"
-    print "\b" if board.to_s[1] == ' '
+    print "\b" if board.to_s[0] == ' '
   end
 
   def show_unplayed_moves board
