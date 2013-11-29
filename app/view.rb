@@ -28,8 +28,8 @@ class View
   end
 
   def show_board board
-    print board.string
-    print ' '
+    puts board.to_s
+    print ' ' if board.to_s[1] == '_'
   end
 
   def show_unplayed_moves board
