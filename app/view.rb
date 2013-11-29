@@ -32,5 +32,12 @@ class View
     print ' '
   end
 
+  def show_board_statistics board
+    string = "#{board.correct_moves.size} possible moves. #{board.incorrect_move_count} incorrect moves."
+    string << " #{board.duplicate_move_count} #{pluralize('duplicate', duplicate_move_count)}." if board.duplicate_move_count > 0
+    puts string
+    puts
+  end
+
 end
 
