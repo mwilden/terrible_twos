@@ -8,8 +8,9 @@ class View
   end
 
   def show_board board
-    puts board.to_s
-    print ' ' if board.to_s[1] == '_'
+    print board.to_s
+    print "\b"
+    print "\b" if board.to_s[1] == ' '
   end
 
   def show_unplayed_moves board
