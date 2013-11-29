@@ -7,17 +7,13 @@ class Drill
   include Enumerable
   extend Forwardable
   def_delegator :@boards, :each
-  attr_reader :correct_answer_count, :incorrect_answer_count, :boards
 
   def initialize starting_letter = 'A', ending_letter = 'Z'
     create_boards starting_letter, ending_letter
-    @correct_answer_count = @incorrect_answer_count = 0
   end
 
-
-  ######
   def create_boards starting_letter, ending_letter
-    clear_boards
+    @boards = []
     for letter in starting_letter..ending_letter
       create_board "#{letter}_", starting_letter, ending_letter
       create_board "_#{letter}", starting_letter, ending_letter
@@ -30,10 +26,6 @@ class Drill
     return unless board.has_any_moves?
     @boards << board
     board
-  end
-
-  def clear_boards
-    @boards = []
   end
 
 end
