@@ -15,8 +15,8 @@ class Drill
   def create_boards starting_letter, ending_letter
     @boards = []
     for letter in starting_letter..ending_letter
-      create_board "#{letter}_", starting_letter, ending_letter
-      create_board "_#{letter}", starting_letter, ending_letter
+      create_board "#{letter} ", starting_letter, ending_letter
+      create_board " #{letter}", starting_letter, ending_letter
     end
     @boards.shuffle!
   end
