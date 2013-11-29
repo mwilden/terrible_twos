@@ -66,7 +66,7 @@ class Controller
   def handle_correct_move move
     @view.show_correct_move move
     @board.record_correct_move move
-    if @board.played_moves.size == @board.move_count
+    if @board.played_moves.size == @board.correct_moves.size
       @view.puts
       return handle_no_more_moves
     else
