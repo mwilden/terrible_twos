@@ -6,6 +6,7 @@ require_relative 'board'
 class Drill
   include Enumerable
   extend Forwardable
+  attr_reader :boards
   def_delegator :@boards, :each
 
   def initialize starting_letter = 'A', ending_letter = 'Z'
