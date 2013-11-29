@@ -5,7 +5,7 @@ require_relative 'app/controller'
 require_relative 'lib/drill'
 
 class TerribleTwos
-  def initialize
+  def initialize options
     @drill = Drill.new
     @controller = Controller.new @drill
   end
@@ -20,9 +20,9 @@ include Methadone::Main
 include Methadone::CLILogging
 
 main do |board|
-  TerribleTwos.new.run
+  TerribleTwos.new(options).run
 end
 
-on '-b BOARD', '--board', 'Drill just one board'
+on '-b BOARD', '--board', 'Specify a single board'
 
 go!
