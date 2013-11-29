@@ -5,5 +5,6 @@ When /^I run "(.*?)"$/ do |program_name|
   step %{I execute the process "#{program_name}"}
 end
 
-Then /^I should see "([\w _]+)"$/ do |text|
+Then /^I should see$/ do |text|
+  %{I should see the following output:}
 end
