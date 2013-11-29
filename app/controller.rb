@@ -14,14 +14,20 @@ class Controller
 
   def run_drill
     for board in @drill.boards
-      @view.show_board board
+      @board = board
+      @view.show_board @board
 
       while true
         response = gets.chomp.upcase
-        response_type = handle_response board, response
+        response_type = handle_response response
         break if [NoMoreMoves, GiveUp].include? response_type
       end
+      @view.puts
     end
+  end
+
+  def get_response
+    gets.chomp.upcase
   end
 
   NoMoreMoves = 1
@@ -30,77 +36,63 @@ class Controller
   Duplicate   = 4
   GiveUp      = 5
 
-  def handle_response board, response
+  def handle_response response
     case
     when response == '~' then exit
-    when response == '?' then handle_give_up board
-    else handle_move board, response
+    when response == '?' then handle_give_up
+    else handle_move response
     end
   end
 
-  def handle_move board, response
-    move = board.find response
+  def handle_move response
+    move = @board.find response
     if move
-      if board.played_moves.include? move
-        handle_duplicate_move board
+      if @board.played_moves.include? move
+        handle_duplicate_move
       else
-        handle_correct_move board, move
+        handle_correct_move move
       end
     else
-      handle_incorrect_move board
+      handle_incorrect_move
     end
   end
 
-  def handle_give_up board
-    string = "Answered #{board.played_moves.count} out of #{board.correct_moves.count}. "
-    string << "The rest of the moves were: "
-    move_strings = []
-    for move in board.moves
-      unless board.moves_played.include? move
-        move_strings << "#{move.word} (#{move.definition})"
-      end
-    end
-    string += move_strings.join(', ') + '.'
-    puts string
+  def handle_give_up
+    @view.show_board_statistics @board
+    @view.show_unplayed_moves @board
     GiveUp
   end
 
-  def handle_correct_move board, move
-    string = "Correct. #{move.word}: #{move.definition}."
-    board.record_correct_move move
-    if board.played_moves.size == board.move_count
-      return handle_no_more_moves board
+  def handle_correct_move move
+    @view.show_correct_move move
+    @board.record_correct_move move
+    if @board.played_moves.size == @board.move_count
+      @view.puts
+      return handle_no_more_moves
     else
-      moves_left_count = board.moves_left_count
-      string << " #{moves_left_count} #{pluralize 'move', moves_left_count} left."
-      puts string
-      @view.show_board board
+      @view.show_moves_left @board
+      @view.show_board @board
     end
     Correct
   end
 
-  def handle_no_more_moves board
-    @view.show_board_statistics board
+  def handle_no_more_moves
+    @view.show_board_statistics @board
     NoMoreMoves
   end
 
-  def handle_incorrect_move board
-    puts "Incorrect."
-    board.record_incorrect_move
-    @view.show_board board
+  def handle_incorrect_move
+    @view.show_incorrect_move
+    @board.record_incorrect_move
+    @view.show_board @board
     Incorrect
   end
 
-  def handle_duplicate_move board
-    puts "Already played."
-    board.record_duplicate_move
-    @view.show_board board
+  def handle_duplicate_move
+    @view.show_duplicate_move
+    @board.record_duplicate_move
+    @view.show_board @board
     Duplicate
   end
 
-  def pluralize root, count
-    string = root
-    string << 's' if count != 1
-    string
-  end
 end

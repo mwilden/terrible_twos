@@ -24,7 +24,7 @@ class Board
     @incorrect_move_count += 1
   end
 
-  def record_duplicate_move move
+  def record_duplicate_move
     @duplicate_move_count += 1
   end
 
