@@ -6,7 +6,7 @@ class Board
   attr_reader :played_moves, :correct_moves, :incorrect_move_count, :duplicate_move_count
 
   def initialize string, first_letter = 'A', last_letter = 'Z'
-    @string = string
+    @string = string.gsub '_', ' '
     @played_moves = []
     @incorrect_move_count = @duplicate_move_count = 0
     @correct_moves = create_moves first_letter, last_letter
