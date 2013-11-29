@@ -6,7 +6,7 @@ require_relative 'lib/drill'
 
 class TerribleTwos
   def initialize options
-    @drill = Drill.new
+    @drill = Drill.new 'A', 'Z', options[:board]
     @controller = Controller.new @drill
   end
 
