@@ -82,15 +82,15 @@ class Controller
   end
 
   def handle_incorrect_move
-    @view.show_incorrect_move
     @board.record_incorrect_move
+    @view.show_incorrect_move
     @view.show_board @board
     Incorrect
   end
 
   def handle_duplicate_move
-    @view.show_duplicate_move
     @board.record_duplicate_move
+    @view.show_duplicate_move
     @view.show_board @board
     Duplicate
   end
