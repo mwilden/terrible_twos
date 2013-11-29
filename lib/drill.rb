@@ -25,7 +25,6 @@ class Drill
     board = Board.new board_string, starting_letter, ending_letter
     return unless board.has_any_moves?
     @boards << board
-    board
   end
 
 end
