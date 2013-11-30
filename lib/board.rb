@@ -3,17 +3,25 @@ require_relative 'terrible_twos'
 require_relative 'scrabble'
 
 class Board
-  attr_reader :played_moves, :correct_moves, :incorrect_move_count, :duplicate_move_count
+  attr_reader :played_moves, :correct_moves, :incorrect_move_count, :duplicate_move_count, :correct_played_move_count
 
   def initialize string, first_letter = 'A', last_letter = 'Z'
     @string = string.gsub '_', ' '
     @played_moves = []
-    @incorrect_move_count = @duplicate_move_count = 0
+    @correct_played_move_count = @incorrect_move_count = @duplicate_move_count = 0
     @correct_moves = create_moves first_letter, last_letter
   end
 
   def to_s
     @string
+  end
+
+  def has_any_moves?
+    !@correct_moves.nil? && !@correct_moves.empty?
+  end
+
+  def no_moves_left?
+    @played_moves.count >= @correct_moves.count
   end
 
   def moves_left_count
@@ -22,6 +30,7 @@ class Board
 
   def record_correct_move move
     @played_moves << move
+    @correct_played_move_count += 1
   end
 
   def record_incorrect_move
@@ -32,6 +41,10 @@ class Board
     @duplicate_move_count += 1
   end
 
+  def has_played? move
+    played_moves.include? move
+  end
+
   def create_moves first_letter, last_letter
     moves = []
     for letter in first_letter..last_letter
@@ -40,10 +53,6 @@ class Board
       moves << two_letter_word if two_letter_word
     end
     moves
-  end
-
-  def has_any_moves?
-    !@correct_moves.nil? && !@correct_moves.empty?
   end
 
   def find letter
