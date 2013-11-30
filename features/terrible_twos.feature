@@ -1,14 +1,14 @@
 # coding: UTF-8
 Feature: Terrible Twos
+  To get better at Scrabble
+  Because I'm old-skool
 
   Scenario: Start program
-    Given I run "terrible_twos -b A_"
-    Then I should see
-    """
-    Mark Wilden
-    """
-    When I enter "Z" into process "terrible_twos"
-    Then I should see
+    Given process activity is logged to "greenletters.log"
+    Given a process from command "terrible_twos -b A_"
+    When I execute the process
+    When I enter "Z"
+    Then I should see the following output:
     """
     Incorrect.
     """
