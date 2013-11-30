@@ -5,10 +5,9 @@ Feature: Terrible Twos
 
   Scenario: Start program
     Given process activity is logged to "greenletters.log"
-    Given a process from command "terrible_twos -b A_"
-    When I execute the process
-    When I enter "Z"
-    Then I should see the following output:
+    Given a process "terrible_twos" from command "terrible_twos -b A_"
+    When I execute the process "terrible_twos"
+    Then I should see the following output from process "terrible_twos":
     """
-    Incorrect.
+    Mark Wilden
     """
