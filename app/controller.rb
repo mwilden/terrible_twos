@@ -4,20 +4,21 @@ require_relative 'view'
 
 class Controller
   def initialize drill
-    @drill, @view = drill, View.new
+    @drill = drill
   end
 
   def run
-    @view.show_banner
+    View.show_banner
     run_drill
   end
 
   def run_drill
     for board in @drill.boards
       @board = board
-      @view.show_board @board
+      @view = View.new board
+      @view.show_board
 
-      while true
+      loop do
         response = gets.chomp.upcase
         response_type = handle_response response
         break if [NoMoreMoves, GiveUp].include? response_type
@@ -47,7 +48,7 @@ class Controller
   def handle_move response
     move = @board.find response
     if move
-      if @board.played_moves.include? move
+      if @board.has_played? move
         handle_duplicate_move
       else
         handle_correct_move move
@@ -58,40 +59,42 @@ class Controller
   end
 
   def handle_give_up
-    @view.show_board_statistics @board
-    @view.show_unplayed_moves @board
+    @view.show_board_statistics
+    @view.show_unplayed_moves
     GiveUp
   end
 
   def handle_correct_move move
-    @view.show_correct_move move
     @board.record_correct_move move
-    if @board.played_moves.size == @board.correct_moves.size
-      @view.puts
-      return handle_no_more_moves
+    if @board.no_moves_left?
+      return handle_no_more_moves move
     else
-      @view.show_moves_left @board
-      @view.show_board @board
+      @view.show_correct_move move
+      @view.show_moves_left
+      @view.show_board
     end
     Correct
   end
 
-  def handle_no_more_moves
-    @view.show_board_statistics @board
+  def handle_no_more_moves move
+    @view.show_correct_move move
+    @view.puts
+    @view.show_unplayed_moves
+    @view.show_board_statistics
     NoMoreMoves
   end
 
   def handle_incorrect_move
     @board.record_incorrect_move
     @view.show_incorrect_move
-    @view.show_board @board
+    @view.show_board
     Incorrect
   end
 
   def handle_duplicate_move
     @board.record_duplicate_move
     @view.show_duplicate_move
-    @view.show_board @board
+    @view.show_board
     Duplicate
   end
 
