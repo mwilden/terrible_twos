@@ -1,0 +1,9 @@
+spawn ruby terrible_twos -b A_
+expect "Mark Wilden"
+send "A\r"
+expect "Correct"
+send "B\r"
+expect "Correct"
+send "C\r"
+expect "Incorrect"
+send "~\r"
