@@ -1,0 +1,11 @@
+# Answer the same move twice
+spawn terrible_twos -b A_
+set timeout 1
+
+send "A\r"
+send "A\r"
+expect {
+  eof { exit 1 }
+  timeout { exit 1 }
+  "Already played."
+}

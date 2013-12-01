@@ -13,4 +13,5 @@ expect {
 }
 
 puts ""
+send "~\r"
 exit 0

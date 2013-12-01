@@ -1,9 +1,28 @@
 spawn ruby terrible_twos -b A_
-expect "Mark Wilden"
+
+expect {
+  timeout { exit 1}
+  "Mark Wilden"
+}
+
 send "A\r"
-expect "Correct"
+expect {
+  timeout { exit 1}
+  "Correct"
+}
+
 send "B\r"
-expect "Correct"
+expect {
+  timeout { exit 1}
+  "Correct"
+}
+
 send "C\r"
-expect "Incorrect"
+expect {
+  timeout { exit 1}
+  "Incorrect"
+}
+
+puts ""
 send "~\r"
+exit 0

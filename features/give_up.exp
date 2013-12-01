@@ -1,0 +1,9 @@
+# Give up on a board and just show moves
+spawn terrible_twos -b Q_
+
+send "?\r"
+expect {
+  eof { exit 1 }
+  timeout { exit 1 }
+  "The rest of the moves were: QI (vital force)."
+}

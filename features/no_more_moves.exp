@@ -1,0 +1,15 @@
+# Cycle through all moves for a board
+# Use a board with a small number of moves
+spawn terrible_twos -b Q_
+
+send "I\r"
+expect {
+  eof { exit 1 }
+  timeout { exit 1 }
+  "Correct."
+}
+expect {
+  eof { exit 1 }
+  timeout { exit 1 }
+  "1/1 possible moves. 0 incorrect moves."
+}
