@@ -41,6 +41,7 @@ class Controller
     case
     when response == '~' then exit
     when response == '?' then handle_give_up
+    when response == '!' then handle_show_all_words
     else handle_move response
     end
   end
@@ -56,6 +57,10 @@ class Controller
     else
       handle_incorrect_move
     end
+  end
+
+  def handle_show_all_words
+    @view.show_all_words
   end
 
   def handle_give_up

@@ -1,0 +1,4 @@
+spawn ruby terrible_twos -b A_
+send "!\r"
+expect "AA (lava) AB"
+expect "ZA (pizza)"

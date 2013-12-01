@@ -57,6 +57,17 @@ class View
     puts "Already played."
   end
 
+  def show_all_words
+    last_word = ''
+    Scrabble.two_letter_words.each do |word|
+      if word.word[0] != last_word[0]
+        puts
+        last_word = word.word
+      end
+      puts "#{word.word} (#{word.definition}) "
+    end
+  end
+
   def pluralize root, count
     string = root
     string << 's' if count != 1
