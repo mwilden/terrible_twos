@@ -1,4 +1,16 @@
+set timeout 1
 spawn ruby terrible_twos -b A_
 send "!\r"
-expect "AA (lava) AB"
-expect "ZA (pizza)"
+
+expect {
+  timeout { exit 1 }
+  "AA (lava)"
+}
+
+expect {
+  timeout { exit 1 }
+  "ZA (pizza)"
+}
+
+puts ""
+exit 0
